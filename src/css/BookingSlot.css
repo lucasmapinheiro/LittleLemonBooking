@@ -1,0 +1,77 @@
+.booking-slot {
+  max-width: 60%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-slot h1 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.booking-slot .available-slots {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.booking-slot .slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  height: 60px;
+  padding: 2px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.booking-slot .slot.selected {
+  background-color: #f4ce14;
+  color: #000000;
+}
+
+.booking-slot .slot.disabled {
+  background-color: #f2f2f2;
+  color: #cccccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .booking-slot {
+    max-width: 100%;
+    margin-top: 0;
+    padding: 10px;
+    display: flex;
+  }
+
+  .booking-slot .available-slots {
+    width: 100%;
+    margin-bottom: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+
+  .booking-slot .slot {
+    height: 40px;
+    padding: 2px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+}
+
+
+
