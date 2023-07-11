@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
-import '../css/BookingSlot.css'
+import '../css/BookingSlot.css';
 
 const initialState = {
   selectedDate: '',
@@ -23,6 +23,27 @@ const reducer = (state, action) => {
   }
 };
 
+async function fetchAvailableSlots(selectedDate, dispatch) {
+  dispatch({ type: 'FETCH_AVAILABLE_SLOTS_REQUEST' });
+
+  try {
+    const apiUrl = 'https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js';
+    const response = await fetch(apiUrl);
+    const data = await response.text();
+
+    const apiFunction = new Function('date', data);
+    const slots = apiFunction(new Date(selectedDate));
+
+    if (Array.isArray(slots) && slots.length > 0) {
+      dispatch({ type: 'FETCH_AVAILABLE_SLOTS_SUCCESS', payload: slots });
+    } else {
+      dispatch({ type: 'FETCH_AVAILABLE_SLOTS_FAILURE', payload: 'No available slots.' });
+    }
+  } catch (error) {
+    dispatch({ type: 'FETCH_AVAILABLE_SLOTS_FAILURE', payload: error.message });
+  }
+}
+
 function BookingSlot({ selectedDate }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -30,25 +51,7 @@ function BookingSlot({ selectedDate }) {
 
   useEffect(() => {
     if (selectedDate) {
-      dispatch({ type: 'FETCH_AVAILABLE_SLOTS_REQUEST' });
-
-      // Simulating an asynchronous API call to fetch available slots
-      setTimeout(() => {
-        // Mocking the available slots data
-        const mockAvailableSlots = [
-          '17:00',
-          '18:00',
-          '19:00',
-          '20:00',
-          '21:00',
-          '22:00',
-        ];
-
-        dispatch({
-          type: 'FETCH_AVAILABLE_SLOTS_SUCCESS',
-          payload: mockAvailableSlots,
-        });
-      }, 1000);
+      fetchAvailableSlots(selectedDate, dispatch);
     }
   }, [selectedDate]);
 
@@ -56,13 +59,13 @@ function BookingSlot({ selectedDate }) {
     <div className="booking-slot">
       <h1>Available Slots</h1>
       {loading && <p>Loading available slots...</p>}
-      {error && <p>Error loading available slots. Please try again.</p>}
+      {error && <p>{error}</p>}
       {availableSlots.length > 0 && (
         <div className="available-slots">
           {availableSlots.map((slot) => (
             <div
               key={slot}
-              className={`slot`}
+              className="slot"
               onClick={() => {
                 console.log(`Selected slot: ${slot}`);
               }}
@@ -77,3 +80,4 @@ function BookingSlot({ selectedDate }) {
 }
 
 export default BookingSlot;
+

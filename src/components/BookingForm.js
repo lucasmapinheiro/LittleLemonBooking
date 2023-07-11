@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import '../css/BookingForm.css';
 
-function BookingForm({ onDateChange }) {
+function BookingForm({ onDateChange, selectedDate, isLoading, onSubmit }) {
   const currentDate = moment().format('YYYY-MM-DD');
   const [reservationData, setReservationData] = useState({
     date: currentDate,
@@ -10,6 +10,7 @@ function BookingForm({ onDateChange }) {
     partySize: '',
     occasion: '',
   });
+  const [isTimeDisabled, setIsTimeDisabled] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +26,7 @@ function BookingForm({ onDateChange }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(reservationData);
+    onSubmit(reservationData);
   };
 
   useEffect(() => {
@@ -35,6 +36,10 @@ function BookingForm({ onDateChange }) {
     }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setIsTimeDisabled(selectedDate !== currentDate || isLoading);
+  }, [selectedDate, currentDate, isLoading]);
 
   return (
     <div className="booking-form">
@@ -60,6 +65,7 @@ function BookingForm({ onDateChange }) {
             value={reservationData.time}
             onChange={handleInputChange}
             required
+            disabled={isTimeDisabled}
           >
             <option value="">Select Time</option>
             <option value="17:00">17:00</option>
@@ -107,4 +113,8 @@ function BookingForm({ onDateChange }) {
 }
 
 export default BookingForm;
+
+
+
+
 
