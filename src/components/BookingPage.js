@@ -4,14 +4,9 @@ import BookingForm from './BookingForm';
 import BookingSlot from './BookingSlot';
 import '../css/BookingPage.css';
 
-function BookingPage() {
-  const [selectedDate, setSelectedDate] = useState('');
+function BookingPage({ onReservationConfirmation, onDateChange, selectedDate }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
 
   const handleSubmit = (formData) => {
     if (!formData.date || !formData.time || !formData.partySize || !formData.occasion) {
@@ -23,12 +18,13 @@ function BookingPage() {
 
     // Simulating a successful reservation for demonstration
     navigate('/confirmed');
+    onReservationConfirmation();
   };
 
   return (
     <div className="booking-page">
       <BookingForm
-        onDateChange={handleDateChange}
+        onDateChange={onDateChange}
         selectedDate={selectedDate}
         isLoading={isLoading}
         onSubmit={handleSubmit}
@@ -45,6 +41,7 @@ function BookingPage() {
 }
 
 export default BookingPage;
+
 
 
 

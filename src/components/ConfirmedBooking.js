@@ -1,12 +1,16 @@
 import React from 'react';
+import '../css/ConfirmedBooking.css';
 
 function ConfirmedBooking() {
   return (
-    <div>
-      <h1>Reservation Confirmed</h1>
-      <p>Your reservation has been confirmed. Thank you!</p>
+    <div className="confirmed-booking">
+      <h2>Reservation Confirmed!</h2>
+      <p>Thank you for making your reservation.</p>
     </div>
   );
 }
 
 export default ConfirmedBooking;
+
+
+

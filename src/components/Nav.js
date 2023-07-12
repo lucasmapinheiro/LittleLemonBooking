@@ -20,7 +20,7 @@ function Nav({ setCurrentPage }) {
       <Link to="/menu" className="nav-item">
         Menu
       </Link>
-      <Link to="/reservations" className="nav-item" onClick={() => handlePageChange('bookingPage')}>
+      <Link to="/booking" className="nav-item" onClick={() => handlePageChange('bookingPage')}>
         Reservations
       </Link>
       <Link to="/order" className="nav-item">
@@ -34,6 +34,7 @@ function Nav({ setCurrentPage }) {
 }
 
 export default Nav;
+
 
 
 

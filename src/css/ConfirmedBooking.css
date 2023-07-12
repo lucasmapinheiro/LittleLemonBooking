@@ -1,0 +1,16 @@
+.confirmed-booking {
+    max-width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    }
+
+    .confirmed-booking h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    }
+
+    .confirmed-booking p {
+    font-size: 16px;
+    margin-bottom: 24px;
+    }

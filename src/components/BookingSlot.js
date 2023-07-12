@@ -81,3 +81,4 @@ function BookingSlot({ selectedDate }) {
 
 export default BookingSlot;
 
+
